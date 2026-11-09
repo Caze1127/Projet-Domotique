@@ -1,102 +1,105 @@
-# Simulateur de domotique — Python / Tkinter
+# 🏠 Simulateur de domotique
 
-**Application de bureau simulant la gestion de l'éclairage et de la température dans trois pièces d'une maison.**
+**Application de bureau Python / Tkinter — simulation du contrôle de l’éclairage et de la température dans trois pièces.**
 
-Développé en **Python** avec **Tkinter**, ce projet propose une interface graphique interactive pour sélectionner une pièce, modifier l'état de sa lumière et ajuster sa température. Chaque pièce conserve ses propres valeurs tant que l'application reste ouverte.
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
+![Tkinter](https://img.shields.io/badge/Interface-Tkinter-555555)
+![Projet](https://img.shields.io/badge/Type-Simulation%20locale-2E7D32)
+![Plateforme](https://img.shields.io/badge/Plateforme-Windows-0078D4?logo=windows&logoColor=white)
 
-> **Périmètre :** il s'agit d'une simulation logicielle. L'application ne communique pas avec des ampoules, thermostats ou autres équipements physiques.
+Ce projet propose une interface graphique simple permettant de sélectionner une pièce, d’allumer ou d’éteindre sa lumière et de modifier sa température. Chaque pièce conserve **son propre état en mémoire pendant l'exécution**. L’objectif est de mettre en pratique la programmation événementielle, la gestion d’état et le développement d’interfaces avec **Tkinter**.
 
-## Fonctionnalités
+> **À noter :** il s’agit d’un simulateur logiciel, sans connexion à des équipements domotiques réels.
 
-- **Trois pièces indépendantes :** cuisine, salon et chambre.
-- **Gestion de l'éclairage :** passage de `OFF` à `ON`, et inversement, pour la pièce sélectionnée.
-- **Réglage de la température :** augmentation ou diminution par pas de **1 °C**, dans l'intervalle **16–30 °C**.
-- **Affichage dynamique :** actualisation de l'état de la lumière et de la température après chaque action.
-- **Conservation des états par pièce :** le passage d'une pièce à une autre permet de retrouver ses dernières valeurs pendant la session.
+## 📸 Aperçu de l’application
 
-**État initial :** la cuisine est sélectionnée ; les trois pièces ont une lumière éteinte et une température de **20 °C**.
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/domotique-cuisine-allumee.png" alt="Cuisine : lumière allumée et température de 20 °C" width="460" /><br />
+      <strong>Cuisine : lumière allumée, 20 °C</strong>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/domotique-salon-eteint-16c.png" alt="Salon : lumière éteinte et température de 16 °C" width="460" /><br />
+      <strong>Salon : lumière éteinte, 16 °C</strong>
+    </td>
+  </tr>
+</table>
 
-## Technologies
+Les deux captures illustrent la conservation d’états distincts selon la pièce sélectionnée. Une [vue d’ensemble de la fenêtre](docs/screenshots/domotique-vue-ensemble.png) est également disponible.
 
-| Technologie | Utilisation |
+## ✨ Fonctionnalités
+
+| Fonctionnalité | Comportement |
 | --- | --- |
-| Python 3 | Logique de l'application et gestion des états |
-| Tkinter | Fenêtre, boutons, libellés et interactions graphiques |
-| Dictionnaires Python | Stockage en mémoire des paramètres de chaque pièce |
+| Choix de la pièce | Sélection entre **Cuisine**, **Salon** et **Chambre** |
+| Éclairage | Activation ou désactivation de la lumière de la pièce sélectionnée (`ON` / `OFF`) |
+| Température | Augmentation ou diminution par incréments de **1 °C** |
+| Limites | Température maintenue entre **16 °C et 30 °C** |
+| Affichage | Actualisation de la lumière et de la température après chaque action |
+| États indépendants | Valeurs propres à chaque pièce tant que la fenêtre reste ouverte |
 
-Aucune bibliothèque Python tierce n'est nécessaire : Tkinter fait partie de la bibliothèque standard sur les installations Python Windows habituelles.
+**État initial :** la cuisine est sélectionnée et les trois pièces démarrent avec leur lumière sur `OFF` et leur température à `20 °C`.
 
-## Lancer l'application
+## 🛠️ Technologies utilisées
 
-### Prérequis
+- **Python 3** — logique de l’application, structures de données et fonctions.
+- **Tkinter** — construction de la fenêtre, boutons, libellés et variables d’interface.
+- **Dictionnaires Python** — stockage des états propres à chaque pièce.
 
-- **Python 3** avec Tkinter ;
-- **Windows recommandé**, car le code utilise `fenetre.state("zoomed")` pour maximiser la fenêtre.
+Aucune bibliothèque Python tierce n’est nécessaire.
 
-### Exécution
+## ▶️ Installation et exécution
 
-1. Télécharger ou cloner ce dépôt.
-2. Ouvrir un terminal dans le dossier du projet.
-3. Exécuter :
+**Prérequis :** Python 3 avec Tkinter, sous Windows de préférence (`fenetre.state("zoomed")` maximise la fenêtre sous Windows).
 
-```powershell
+```bash
+git clone https://github.com/Caze1127/Projet-Domotique.git
+cd Projet-Domotique
 python Domotique.py
 ```
 
-Sur Windows, si la commande `python` n'est pas reconnue, essayer :
+Sous Windows, si `python` ne fonctionne pas, essayer `py Domotique.py`.
 
-```powershell
-py Domotique.py
-```
+**Pour utiliser l’application :** sélectionner une pièce, agir sur **Allumer / Éteindre**, puis ajuster la température à l’aide des boutons **+ / −**. Changer ensuite de pièce pour consulter ses paramètres.
 
-### Utilisation
+## 🧩 Fonctionnement technique
 
-1. Sélectionner **Cuisine**, **Salon** ou **Chambre**.
-2. Cliquer sur **Allumer** ou **Éteindre** pour changer l'état de la lumière.
-3. Cliquer sur **+** ou **−** pour ajuster la température.
-4. Changer de pièce pour consulter ou modifier ses paramètres indépendants.
+Le dictionnaire `etats` associe à chaque pièce un état de lumière et une température. Les interactions sont gérées par les fonctions suivantes :
 
-## Fonctionnement technique
+| Fonction | Rôle |
+| --- | --- |
+| `choisir_piece()` | Met à jour la pièce active et l’interface |
+| `allumer()` / `eteindre()` | Modifient la lumière de la pièce active |
+| `augmenter_temperature()` / `diminuer_temperature()` | Ajustent la valeur dans les limites autorisées |
+| `mettre_a_jour_affichage()` | Synchronise les textes affichés avec l’état en mémoire |
 
-Les états sont regroupés dans un dictionnaire Python `etats`. Chaque pièce possède deux propriétés : `lumiere` et `temperature`.
+L’interface utilise notamment les widgets Tkinter `Frame`, `Button` et `Label`, ainsi que des variables `StringVar`.
 
-Les principales fonctions sont :
-
-- `choisir_piece()` : sélectionne la pièce active et met à jour l'affichage ;
-- `allumer()` / `eteindre()` : modifient l'état de son éclairage ;
-- `augmenter_temperature()` / `diminuer_temperature()` : modifient la température en respectant les limites ;
-- `mettre_a_jour_affichage()` : synchronise les libellés avec les valeurs en mémoire.
-
-L'interface s'appuie notamment sur `Button`, `Label`, `Frame` et `StringVar` de Tkinter.
-
-## Structure du dépôt
+## 📁 Structure du dépôt
 
 ```text
-smart-home-simulator-tkinter/
+Projet-Domotique/
 ├── Domotique.py
-├── Projet _ Application-de-Domotique.pdf
 ├── README.md
-└── .gitignore
+├── .gitignore
+└── docs/
+    ├── Conception-Application-Domotique.pdf
+    └── screenshots/
+        ├── domotique-cuisine-allumee.png
+        ├── domotique-salon-eteint-16c.png
+        └── domotique-vue-ensemble.png
 ```
 
-Le [document de conception](Projet%20_%20Application-de-Domotique.pdf) détaille le noyau fonctionnel, les commandes utilisateur, les états du système, les réponses de l'interface et une **maquette réalisée sur Canva** (page 5). Cette maquette n'est pas une capture d'écran de l'application exécutée.
+La [documentation de conception](docs/Conception-Application-Domotique.pdf) présente le noyau fonctionnel, les commandes, les états, les réponses perceptibles et la maquette initiale (page 5 du PDF).
 
-## Limites et améliorations possibles
+## 🚧 Limites et évolutions possibles
 
-**Dans la version actuelle :**
-
-- les états sont conservés uniquement en mémoire et sont réinitialisés au redémarrage ;
-- aucun équipement domotique réel n'est connecté ;
-- l'apparence des boutons « Allumer » et « Éteindre » ne se resynchronise pas automatiquement avec l'état lumineux lors du changement de pièce ;
-- le comportement de maximisation de la fenêtre est prévu pour Windows.
-
-**Évolutions envisageables :**
-
-- enregistrer et restaurer les paramètres des pièces ;
-- synchroniser systématiquement le style des boutons avec les états ;
-- séparer davantage la logique métier de l'interface pour faciliter les tests ;
-- adapter l'affichage à différents systèmes d'exploitation.
+- Les valeurs ne sont pas conservées après la fermeture de l’application.
+- L’application ne contrôle pas d’objets connectés réels.
+- La couleur des boutons d’éclairage n’est pas toujours resynchronisée lors d’un changement de pièce ; l’état affiché `ON` / `OFF` reste la référence.
+- Évolutions possibles : sauvegarde des préférences, meilleure séparation interface / logique, adaptation à d’autres systèmes d’exploitation et tests automatisés.
 
 ---
 
-*Projet de programmation et de conception d'interface graphique — simulation de gestion domotique.*
+*Projet pédagogique de développement d’interface graphique et de programmation événementielle en Python.*
